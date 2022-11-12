@@ -11,17 +11,17 @@ from flask_gravatar import Gravatar
 import smtplib
 import os
 
-my_email = 'aumbattul1111@gmail.com'
-password = 'jmkmljlaqvbnalrf'
+my_email = os.environ.get('MY_EMAIL')
+password = os.environ.get('PASSWORD')
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'thisisasecretkey'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 ckeditor = CKEditor(app)
 Bootstrap(app)
 Gravatar(app)
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL',"sqlite:///blog.db")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('MONGO_URI',"sqlite:///blog.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -68,7 +68,7 @@ class Comment(db.Model):
     text = db.Column(db.Text, nullable=False)
 
 
-# db.create_all()
+db.create_all()
 
 
 @app.route('/')
