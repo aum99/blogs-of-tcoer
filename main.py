@@ -222,7 +222,7 @@ def delete_post(post_id):
     db.session.commit()
     return redirect(url_for('get_all_posts'))
 
-db.create_all()
+# db.create_all()
 
 if __name__ == "__main__":
     app.run(debug=True)
