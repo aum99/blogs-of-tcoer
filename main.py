@@ -210,7 +210,7 @@ def edit_post(post_id):
         post.author = edit_form.author.data
         post.body = edit_form.body.data
         db.session.commit()
-        return redirect(url_for("show_post", post_id=post.id))
+        return redirect(url_for("show_post", post=post, post_id=post.id))
 
     return render_template("make-post.html", post=post, form=edit_form)
 
